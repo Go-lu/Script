@@ -196,7 +196,7 @@ def open_box (O000O0OOOOOOO0O0O ,OO00OOOO000000OO0 ):#line:220
             else :#line:246
                 notify ('\n🚨该账号ck为空！请检查后修改！')#line:247
             if len (O000O0OOOOOOO0O0O )-(OOO0O0000O0OO00O0 +1 )>0 :#line:248
-                logger .info ('\n🕰️休息三秒后开始下一账号~~')#line:249
+                logger .info ('\n🕰️休息三秒后开始下一账号~~')#line:249 
                 time .sleep (3 )#line:250
             OOO0O0000O0OO00O0 +=1 #line:251
         if str (OO00OOOO000000OO0 )=='3':#line:252
