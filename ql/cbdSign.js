@@ -36,7 +36,7 @@ let wait = ms => new Promise(resolve => setTimeout(resolve, ms));
 //获取token、oid及uid
 function get_msg() {
     // 此处从青龙中获取token, 分割方式根据实际情况修改
-    return process.env.globalConfig['evnName'].split(globalConfig.splitMethod);
+    return process.env[globalConfig.evnName].split(globalConfig.splitMethod);
 }
 
 /**
