@@ -159,10 +159,30 @@ const signed = async (index, token, retryTime = 0) => {
     try {
         let resp = await axios(config(token, 0));
 
-        if (resp.data.data['activityPush'].code === 0) {
-            notify(`\n✅第 [${index + 1}] 个token:: ${token} 签到成功`);
+        if (resp.data.code.toString() === "000") {
+            const signInfo = JSON.parse(resp.data.data['marketingGiftConfCOList'][0]['ruleJson']);
+            const signDay = signInfo['triggerDay']
+            let giftInfo = "0"
+            try {
+                giftInfo = resp.data.data['marketingGiftConfCOList'][0]['giftList'][0].id;
+            } catch (e) {
+                console.log("啥都没得到~")
+            }
+            let gift = "=>屁=>"
+            if (giftInfo !== "0") {
+                gift = giftInfo === "35708"
+                    ? "【8月】签到有礼-整单88折券"
+                    : giftInfo === "35710"
+                        ? "【8月】签到有礼-整单85折券"
+                        : giftInfo === "35712"
+                            ? "【8月】签到有礼-整单75折券"
+                            : giftInfo === "35714"
+                                ? "【8月】签到有礼-指定饮品免单券"
+                                : `未知礼物id: ${giftInfo}`
+            }
+            notify(`\n✅第 [${index + 1}] 个token:: ${token} 签到成功，连续签到 [${signDay}] 天，>> 获得 [${gift}] <<`);
         } else {
-            notify(`\n❎第 [${index + 1}] 个token:: ${token} --> ${resp.data.data['activityPush'].message}`);
+            notify(`\n❎第 [${index + 1}] 个token:: ${token} --> ${resp.data.data.msg}`);
         }
     } catch (error) {
         console.log(`\n❌第 [${index + 1}] 个token:: ${token} 签到失败，三秒后重试，已重试 [${retryTime}] 次`);
