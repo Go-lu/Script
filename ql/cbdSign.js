@@ -182,7 +182,7 @@ const signed = async (index, token, retryTime = 0) => {
             }
             notify(`\n✅第 [${index + 1}] 个token:: ${token} 签到成功，连续签到 [${signDay}] 天，>> 获得 [${gift}] <<`);
         } else {
-            notify(`\n❎第 [${index + 1}] 个token:: ${token} --> ${resp.data.data.msg}`);
+            notify(`\n❎第 [${index + 1}] 个token:: ${token} --> ${resp.data.msg}`);
         }
     } catch (error) {
         console.log(`\n❌第 [${index + 1}] 个token:: ${token} 签到失败，三秒后重试，已重试 [${retryTime}] 次`);
